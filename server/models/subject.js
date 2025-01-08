@@ -37,6 +37,5 @@ const CronogramaSchema = new mongoose.Schema({
   sábado: [{ type: String }]
 });
 
-// Exportando os modelos
 export const Subject = mongoose.model('Subject', SubjectSchema);
 export const Cronograma = mongoose.model('Cronograma', CronogramaSchema);

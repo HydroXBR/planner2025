@@ -1,16 +1,16 @@
 function round(numero, casasDecimais) {
     casasDecimais = typeof casasDecimais !== 'undefined' ? casasDecimais : 2;
-    return +(Math.floor(numero + ('e+' + casasDecimais)) + ('e-' + casasDecimais));
+    return +(Math.floor(numero + ('e+' + casasDecimais)) + ('e-' + casasDecimais))
 }
 
 async function fetchStudyData() {
-    const response = await fetch('http://127.0.0.1:3000/data');
+    const response = await fetch('http://127.0.0.1:3000/data')
     return await response.json();
 }
 
 async function fetchCronograma() {
-    const response = await fetch('http://127.0.0.1:3000/cronograma');
-    return await response.json();
+    const response = await fetch('http://127.0.0.1:3000/cronograma')
+    return await response.json()
 }
 
 function formatDate(date) {
@@ -21,22 +21,22 @@ function getDia(numm) {
     const diasDaSemana = [
         "domingo", "segunda", "terça", "quarta", "quinta", "sexta", "sábado"
     ];
-    return diasDaSemana[numm];
+    return diasDaSemana[numm]
 }
 
 async function buscarPrimeiroTopicNaoConcluido(materia) {
-    const response = await fetch('http://127.0.0.1:3000/data');
-    const subjectData = await response.json();
-    const ttopic = subjectData.find(e => e.subject === materia);
+    const response = await fetch('http://127.0.0.1:3000/data')
+    const subjectData = await response.json()
+    const ttopic = subjectData.find(e => e.subject === materia)
 
     if (!ttopic) {
-        document.getElementById("aviso").innerText = `Disciplina "${materia}" não encontrada!`;
+        document.getElementById("aviso").innerText = `Disciplina "${materia}" não encontrada!`
         setTimeout(() => {
-            document.getElementById("aviso").innerText = "";
-        }, 2000);
-        return;  
+            document.getElementById("aviso").innerText = ""
+        }, 2000)
+        return;
     }
-    return ttopic.topics.find(topic => topic.concluido === false);
+    return ttopic.topics.find(topic => topic.concluido === false)
 }
 
 async function atualizarTopico(topicId, materia, topicData) {
@@ -53,20 +53,20 @@ async function atualizarTopico(topicId, materia, topicData) {
                 ...topicData
             }
         })
-    });
-    return await resposta.json();
+    })
+    return await resposta.json()
 }
 
 let addZero = num => num < 10 ? "0" + num : num
 
 function table(date){
     let newdiv = document.createElement("div");
-    newdiv.id = "div-" + addZero(date.getDate()) + addZero(date.getMonth() + 1) + date.getFullYear();
-    let h3 = document.createElement("h3");
-    h3.id = "h3-" + addZero(date.getDate()) + addZero(date.getMonth() + 1) + date.getFullYear();
-    h3.innerText = addZero(date.getDate()) + `/` + addZero(date.getMonth() + 1) + `/` + date.getFullYear();
-    let newtb = document.createElement("table");
-    newtb.id = "table-" + addZero(date.getDate()) + addZero(date.getMonth() + 1) + date.getFullYear();
+    newdiv.id = "div-" + addZero(date.getDate()) + addZero(date.getMonth() + 1) + date.getFullYear()
+    let h3 = document.createElement("h3")
+    h3.id = "h3-" + addZero(date.getDate()) + addZero(date.getMonth() + 1) + date.getFullYear()
+    h3.innerText = addZero(date.getDate()) + `/` + addZero(date.getMonth() + 1) + `/` + date.getFullYear()
+    let newtb = document.createElement("table")
+    newtb.id = "table-" + addZero(date.getDate()) + addZero(date.getMonth() + 1) + date.getFullYear()
 
     newdiv.appendChild(h3)
     newdiv.appendChild(newtb)
@@ -89,47 +89,47 @@ function table(date){
 function line(table, disciplina, assunto, volume, frente, pagina, paginafinal, exercicios) {
     let arr = [disciplina, assunto, volume, frente, pagina, paginafinal, exercicios];
     
-    let tbody = table.querySelector("tbody"); 
+    let tbody = table.querySelector("tbody");
     
     if (!tbody) {
-        console.error("Erro: tbody não encontrado na tabela!");
+        console.error("Erro: tbody não encontrado na tabela!")
         return;
     }
     
-    let newline = document.createElement("tr");
+    let newline = document.createElement("tr")
     for (var i = 0; i < arr.length; i++) {
-        let thp = document.createElement("td");
-        thp.innerText = arr[i];
-        newline.appendChild(thp);
+        let thp = document.createElement("td")
+        thp.innerText = arr[i]
+        newline.appendChild(thp)
     }
 
-    tbody.appendChild(newline);
+    tbody.appendChild(newline)
 }
 
 function linetext(table, text) {
     let tbody = table.querySelector("tbody");
     
     if (!tbody) {
-        console.error("Erro: tbody não encontrado na tabela!");
+        console.error("Erro: tbody não encontrado na tabela!")
         return;
     }
 
-    let mergedRow = document.createElement("tr");
-    let mergedCell = document.createElement("td");
+    let mergedRow = document.createElement("tr")
+    let mergedCell = document.createElement("td")
 
-    mergedCell.colSpan = 6; // Mescla 6 colunas
-    mergedCell.innerText = text;
-    mergedCell.style.textAlign = "center"; // Centraliza o texto (opcional)
-    mergedCell.style.fontWeight = "bold"; // Deixa o texto em negrito (opcional)
+    mergedCell.colSpan = 6
+    mergedCell.innerText = text
+    mergedCell.style.textAlign = "center"
+    mergedCell.style.fontWeight = "bold"
 
-    mergedRow.appendChild(mergedCell);
-    tbody.appendChild(mergedRow);
+    mergedRow.appendChild(mergedCell)
+    tbody.appendChild(mergedRow)
 }
 
 async function loadSchedule() {
     try {
-        const weeklySchedule = await fetchCronograma();
-        const allData = await fetchStudyData();
+        const weeklySchedule = await fetchCronograma()
+        const allData = await fetchStudyData()
 
         let arrdisc =  [
             {sub: "Biologia", avtopics: allData.find(item => item.subject == "Biologia").topics.filter(item => !item.concluido)},
@@ -144,11 +144,11 @@ async function loadSchedule() {
         ]
     
 
-        const today = new Date();
-        const endDate = new Date('2025-11-30');
+        const today = new Date()
+        const endDate = new Date('2025-11-30')
 
-        let availableTopics = allData.filter(item => !item.concluido);
-        let currentDate = new Date(today);
+        let availableTopics = allData.filter(item => !item.concluido)
+        let currentDate = new Date(today)
 
         while (currentDate <= endDate) {
             let stdiv = document.getElementById("scheduleList")
@@ -174,9 +174,7 @@ async function loadSchedule() {
             currentDate.setDate(currentDate.getDate() + 1);
         }
     } catch (error) {
-        console.error('Erro ao carregar cronograma:', error);
+        console.error('Erro ao carregar cronograma:', error)
     }
 }
-
-// Carrega ao iniciar a página
-document.addEventListener('DOMContentLoaded', loadSchedule);
+document.addEventListener('DOMContentLoaded', loadSchedule)

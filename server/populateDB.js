@@ -11,7 +11,6 @@ async function populateDatabase() {
         await mongoose.connect(uri);
         console.log('🔥 Conectado ao MongoDB');
 
-        // Inserir Dados de Matérias
         await Subject.insertMany([
             /*{
               subject: "Biologia",
@@ -201,7 +200,6 @@ async function populateDatabase() {
             }*/
         ]);
 
-        // Inserir Cronograma
         /*await Cronograma.create({
             segunda: ["Biologia", "Química", "História"],
             terça: ["Geografia, Português", "Física"],
