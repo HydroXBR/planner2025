@@ -39,23 +39,6 @@ async function buscarPrimeiroTopicNaoConcluido(materia) {
     return ttopic.topics.find(topic => topic.concluido === false)
 }
 
-async function atualizarTopico(topicId, materia, topicData) {
-    const resposta = await fetch('http://127.0.0.1:3000/update-topic', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            topicId,
-            materia,
-            updates: {
-                concluido: true,
-                ...topicData
-            }
-        })
-    })
-    return await resposta.json()
-}
 
 let addZero = num => num < 10 ? "0" + num : num
 
@@ -117,7 +100,7 @@ function linetext(table, text) {
     let mergedRow = document.createElement("tr")
     let mergedCell = document.createElement("td")
 
-    mergedCell.colSpan = 6
+    mergedCell.colSpan = 7
     mergedCell.innerText = text
     mergedCell.style.textAlign = "center"
     mergedCell.style.fontWeight = "bold"
