@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planner Diário</title>
+    <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.freepik.com/256/3534/3534033.png?semt=ais_hybrid">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>📅 Cronograma - Rumo ao Enem</h1>
+    </header>
+    <main>
+        <section id="today-studies">
+            <h2>📚 Conteúdos de Hoje</h2>
+            <div id="studyList">
+                <table id="tabletoday">
+                    <thead>
+                      <tr>
+                        <th>Disciplina</th>
+                        <th>Conteúdo</th>
+                        <th>Volume</th>
+                        <th>Frente</th>
+                        <th>Página</th>
+                        <th>Fim</th>
+                        <th>Exercícios</th>
+                        <th>Questões feitas</th>
+                        <th>Questões corretas</th>
+                        <th>Dificuldade</th>
+                        <th>Estudar</th>
+                      </tr>
+                    </thead>
+                    <tbody id="tbodytoday">
+            
+                    </tbody>
+                  </table>
+                  <p id="aviso"></p>
+            </div>
+        </section>
+        <section id="timing">
+            <div id="crono">
+                <h2>⌛ Cronômetro</h2>
+                <p id="cronometro">00:00:00.0</p>
+                <button id="btnLigar">Ligar Cronômetro</button>
+                <button id="btnPausar">Pausar Cronômetro</button>
+                <button id="btnResetar">Resetar</button>
+                <script src="main.js"></script>
+            </div>
+        </section>
+        <section id="performance">
+            <h2>📈 Desempenho</h2>
+            <div id="performanceList">
+                <canvas id="studyChart2"></canvas>
+                <canvas id="studyChart" width="400" height="200"></canvas>
+                <canvas id="questionsChart" width="400" height="200"></canvas>
+            </div>
+        </section>
+        <section id="others">
+            <div id="reviewList">
+                <a href="/schedule.html">Programação Anual</a>
+            </div>
+        </section>
+
+        <section id="review">
+            <h2>🔄 Revisões</h2>
+            <div id="reviewList">
+                <table id="tabletoday2">
+                    <thead>
+                      <tr>
+                        <th>Disciplina</th>
+                        <th>Conteúdo</th>
+                        <th>Pág. Revisão</th>
+                        <th>Questões feitas</th>
+                        <th>Questões corretas</th>
+                        <th>Revisar</th>
+                      </tr>
+                    </thead>
+                    <tbody id="tbodytoday2">
+            
+                    </tbody>
+                  </table>
+            </div>
+        </section>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js" type="module" defer></script>
+</body>
+</html>
